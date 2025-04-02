@@ -76,6 +76,7 @@ const FormSection = ({ onSubmit }) => {
         <MenuItem value="Lebanon">Lebanon</MenuItem>
         <MenuItem value="Cairo">Cairo</MenuItem>
         <MenuItem value="Canada">Canada</MenuItem>
+        <MenuItem value="Paris">Paris</MenuItem>
       </TextField>
       <RadioGroup
         row
