@@ -6,7 +6,7 @@ const Profile = () => {
     <Card sx={{ maxWidth: 400, margin: "auto", textAlign: "center", mt: 3 }}>
       <Avatar
         sx={{
-          width: { xs: 80, sm: 100, md: 120 }, // Responsive sizes
+          width: { xs: 80, sm: 100, md: 120 }, 
           height: { xs: 80, sm: 100, md: 120 },
           margin: "auto",
         }}

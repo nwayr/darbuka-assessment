@@ -35,7 +35,6 @@ const Header = () => {
             My Website
           </Typography>
 
-          {/* Desktop Navigation (Hidden on Small Screens) */}
           <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 2 }}>
             {navLinks.map(({ label, path }) => (
               <Button key={label} color="inherit" component={Link} to={path}>
@@ -44,7 +43,6 @@ const Header = () => {
             ))}
           </Box>
 
-          {/* Mobile Hamburger Menu (Visible on Small Screens) */}
           <IconButton
             color="inherit"
             onClick={toggleDrawer}
@@ -55,7 +53,6 @@ const Header = () => {
         </Toolbar>
       </AppBar>
 
-      {/* Mobile Drawer with the Same Functionality as Desktop Menu */}
       <Drawer
         anchor="right"
         open={mobileOpen}

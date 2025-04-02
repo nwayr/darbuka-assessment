@@ -18,29 +18,42 @@ const FormSection = ({ onSubmit }) => {
   const [email, setEmail] = useState("");
   const [country, setCountry] = useState("");
   const [gender, setGender] = useState("");
+  const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState(null);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [errorSnackbar, setErrorSnackbar] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Check if any required field is empty
-    if (!name || !email || !country || !gender) {
+    if (!name || !email || !country || !gender || !image) {
       setErrorSnackbar(true);
       return;
     }
 
-    onSubmit({ name, email, country, gender });
+    onSubmit({ name, email, country, gender, image });
 
-    // Show success message
     setOpenSnackbar(true);
 
-    // Reset form fields
     setName("");
     setEmail("");
     setCountry("");
     setGender("");
     setDate(null);
+    setImage(null);
+    setPreview(null);
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (!file.type.startsWith("image/")) {
+        alert("Please upload a valid image file.");
+        return;
+      }
+      setImage(file);
+      setPreview(URL.createObjectURL(file));
+    }
   };
 
   return (
@@ -96,11 +109,27 @@ const FormSection = ({ onSubmit }) => {
           )}
         />
       </LocalizationProvider>
+
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleFileChange}
+        style={{ marginTop: "15px" }}
+      />
+      {preview && (
+        <div style={{ marginTop: "10px", textAlign: "center" }}>
+          <img
+            src={preview}
+            alt="Preview"
+            style={{ width: "100px", height: "100px", borderRadius: "10px" }}
+          />
+        </div>
+      )}
+
       <Button variant="contained" color="primary" fullWidth type="submit">
         Submit
       </Button>
 
-      {/* Success Snackbar */}
       <Snackbar
         open={openSnackbar}
         autoHideDuration={6000}
@@ -116,7 +145,6 @@ const FormSection = ({ onSubmit }) => {
         </Alert>
       </Snackbar>
 
-      {/* Error Snackbar */}
       <Snackbar
         open={errorSnackbar}
         autoHideDuration={6000}
@@ -127,7 +155,7 @@ const FormSection = ({ onSubmit }) => {
           severity="error"
           sx={{ backgroundColor: "red", color: "white" }}
         >
-          Please fill in all fields before submitting.
+          Please fill in all fields and upload an image before submitting.
         </Alert>
       </Snackbar>
     </form>
