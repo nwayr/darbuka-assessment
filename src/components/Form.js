@@ -6,6 +6,8 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { LocalizationProvider, DatePicker } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
@@ -16,10 +18,23 @@ const FormSection = ({ onSubmit }) => {
   const [email, setEmail] = useState("");
   const [country, setCountry] = useState("");
   const [gender, setGender] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [errorSnackbar, setErrorSnackbar] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ name, email, country, gender, date });
+
+    // Check if any required field is empty
+    if (!name || !email || !country || !gender) {
+      setErrorSnackbar(true);
+      return;
+    }
+
+    onSubmit({ name, email, country, gender });
+
+    // Show success message
+    setOpenSnackbar(true);
+
     // Reset form fields
     setName("");
     setEmail("");
@@ -83,6 +98,37 @@ const FormSection = ({ onSubmit }) => {
       <Button variant="contained" color="primary" fullWidth type="submit">
         Submit
       </Button>
+
+      {/* Success Snackbar */}
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setOpenSnackbar(false)}
+      >
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity="info"
+          sx={{ backgroundColor: "blue", color: "white" }}
+        >
+          User added successfully!
+          <br /> Go to People page to view
+        </Alert>
+      </Snackbar>
+
+      {/* Error Snackbar */}
+      <Snackbar
+        open={errorSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setErrorSnackbar(false)}
+      >
+        <Alert
+          onClose={() => setErrorSnackbar(false)}
+          severity="error"
+          sx={{ backgroundColor: "red", color: "white" }}
+        >
+          Please fill in all fields before submitting.
+        </Alert>
+      </Snackbar>
     </form>
   );
 };
