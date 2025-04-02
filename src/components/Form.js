@@ -10,21 +10,63 @@ import {
 import { LocalizationProvider, DatePicker } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 
-const FormSection = () => {
+const FormSection = ({ onSubmit }) => {
   const [date, setDate] = useState(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [country, setCountry] = useState("");
+  const [gender, setGender] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit({ name, email, country, gender, date });
+    // Reset form fields
+    setName("");
+    setEmail("");
+    setCountry("");
+    setGender("");
+    setDate(null);
+  };
 
   return (
-    <form style={{ maxWidth: 400, margin: "auto", marginTop: "20px" }}>
-      <TextField fullWidth label="Name" margin="normal" />
-      <TextField fullWidth label="Email" margin="normal" type="email" />
-      <TextField select fullWidth label="Country" margin="normal">
+    <form
+      onSubmit={handleSubmit}
+      style={{ maxWidth: 400, margin: "auto", marginTop: "20px" }}
+    >
+      <TextField
+        fullWidth
+        label="Name"
+        margin="normal"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <TextField
+        fullWidth
+        label="Email"
+        margin="normal"
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <TextField
+        select
+        fullWidth
+        label="Country"
+        margin="normal"
+        value={country}
+        onChange={(e) => setCountry(e.target.value)}
+      >
         <MenuItem value="USA">USA</MenuItem>
         <MenuItem value="UK">UK</MenuItem>
         <MenuItem value="Lebanon">Lebanon</MenuItem>
         <MenuItem value="Cairo">Cairo</MenuItem>
-        <MenuItem value="India">Canada</MenuItem>
+        <MenuItem value="Canada">Canada</MenuItem>
       </TextField>
-      <RadioGroup row>
+      <RadioGroup
+        row
+        value={gender}
+        onChange={(e) => setGender(e.target.value)}
+      >
         <FormControlLabel value="male" control={<Radio />} label="Male" />
         <FormControlLabel value="female" control={<Radio />} label="Female" />
       </RadioGroup>

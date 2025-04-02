@@ -2,67 +2,80 @@ import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
-  IconButton,
   Typography,
   Button,
+  IconButton,
   Drawer,
   List,
   ListItem,
+  ListItemText,
+  Box,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Link } from "react-router-dom";
 
 const Header = () => {
-  const [open, setOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const toggleDrawer = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const navLinks = [
+    { label: "Home", path: "/" },
+    { label: "People", path: "/about" },
+    { label: "Contact", path: "/contact" },
+  ];
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ background: "#333" }}>
         <Toolbar>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            My Website
+          </Typography>
+
+          {/* Desktop Navigation (Hidden on Small Screens) */}
+          <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 2 }}>
+            {navLinks.map(({ label, path }) => (
+              <Button key={label} color="inherit" component={Link} to={path}>
+                {label}
+              </Button>
+            ))}
+          </Box>
+
+          {/* Mobile Hamburger Menu (Visible on Small Screens) */}
           <IconButton
-            edge="start"
             color="inherit"
-            onClick={() => setOpen(true)}
-            sx={{ display: { md: "none" } }}
+            onClick={toggleDrawer}
+            sx={{ display: { xs: "block", sm: "none" } }}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            My Page
-          </Typography>
-          <Button
-            color="inherit"
-            sx={{ display: { xs: "none", md: "inline-block" } }}
-          >
-            Home
-          </Button>
-          <Button
-            color="inherit"
-            sx={{ display: { xs: "none", md: "inline-block" } }}
-          >
-            About
-          </Button>
-          <Button
-            color="inherit"
-            sx={{ display: { xs: "none", md: "inline-block" } }}
-          >
-            Contact
-          </Button>
         </Toolbar>
       </AppBar>
 
-      {/* Mobile Drawer */}
-      <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
-        <List>
-          <ListItem button onClick={() => setOpen(false)}>
-            Home
-          </ListItem>
-          <ListItem button onClick={() => setOpen(false)}>
-            About
-          </ListItem>
-          <ListItem button onClick={() => setOpen(false)}>
-            Contact
-          </ListItem>
-        </List>
+      {/* Mobile Drawer with the Same Functionality as Desktop Menu */}
+      <Drawer
+        anchor="right"
+        open={mobileOpen}
+        onClose={toggleDrawer}
+        sx={{ "& .MuiDrawer-paper": { width: 250 } }}
+      >
+        <Box
+          sx={{ width: 250 }}
+          role="presentation"
+          onClick={toggleDrawer}
+          onKeyDown={toggleDrawer}
+        >
+          <List>
+            {navLinks.map(({ label, path }) => (
+              <ListItem button key={label} component={Link} to={path}>
+                <ListItemText primary={label} />
+              </ListItem>
+            ))}
+          </List>
+        </Box>
       </Drawer>
     </>
   );
