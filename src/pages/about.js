@@ -12,7 +12,7 @@ const About = ({ submissions }) => {
       }}
     >
       <Typography variant="h4" gutterBottom>
-        About
+        People
       </Typography>
       <Grid container spacing={2} justifyContent="center">
         {submissions.map((submission, index) => (
