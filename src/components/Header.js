@@ -37,7 +37,29 @@ const Header = () => {
 
           <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 2 }}>
             {navLinks.map(({ label, path }) => (
-              <Button key={label} color="inherit" component={Link} to={path}>
+              <Button
+                key={label}
+                color="inherit"
+                component={Link}
+                to={path}
+                sx={{
+                  position: "relative",
+                  "&::after": {
+                    content: '""',
+                    position: "absolute",
+                    width: "100%",
+                    height: "2px",
+                    bottom: 0,
+                    left: 0,
+                    backgroundColor: "white",
+                    transform: "scaleX(0)",
+                    transition: "transform 0.3s ease-in-out",
+                  },
+                  "&:hover::after": {
+                    transform: "scaleX(1)",
+                  },
+                }}
+              >
                 {label}
               </Button>
             ))}
