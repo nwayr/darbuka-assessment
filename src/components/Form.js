@@ -8,7 +8,11 @@ import {
   Radio,
   Snackbar,
   Alert,
+  Avatar,
+  IconButton,
+  Typography,
 } from "@mui/material";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { LocalizationProvider, DatePicker } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 
@@ -110,22 +114,54 @@ const FormSection = ({ onSubmit }) => {
         />
       </LocalizationProvider>
 
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleFileChange}
-        style={{ marginTop: "15px" }}
-      />
-      {preview && (
-        <div style={{ marginTop: "10px", textAlign: "center" }}>
-          <img
-            src={preview}
-            alt="Preview"
-            style={{ width: "100px", height: "100px", borderRadius: "10px" }}
-          />
-        </div>
-      )}
+      {/* Image Upload Section */}
+      <div style={{ textAlign: "center", marginTop: "20px" }}>
+        <input
+          type="file"
+          accept="image/*"
+          id="image-upload"
+          style={{ display: "none" }}
+          onChange={handleFileChange}
+        />
+        <label htmlFor="image-upload">
+          <IconButton
+            component="span"
+            color="primary"
+            sx={{
+              background: "#f5f5f5",
+              borderRadius: "10px",
+              padding: "10px",
+              "&:hover": { background: "#e0e0e0" },
+            }}
+          >
+            <PhotoCamera fontSize="large" />
+          </IconButton>
+        </label>
 
+        {preview && (
+          <div style={{ marginTop: "10px" }}>
+            <Avatar
+              src={preview}
+              alt="Preview"
+              sx={{
+                width: 100,
+                height: 100,
+                margin: "auto",
+                border: "2px solid #3f51b5",
+              }}
+            />
+          </div>
+        )}
+
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          sx={{ marginTop: "5px" }}
+        >
+          Upload an image
+        </Typography>
+      </div>
+      <br />
       <Button variant="contained" color="primary" fullWidth type="submit">
         Submit
       </Button>
