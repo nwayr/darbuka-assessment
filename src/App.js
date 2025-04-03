@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Box, Typography, Grid } from "@mui/material"; // Import necessary MUI components
+import { Box } from "@mui/material"; 
 import Header from "./components/Header";
 import Profile from "./components/Profile";
 import FormSection from "./components/Form";
