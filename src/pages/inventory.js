@@ -14,7 +14,7 @@ import {
   AccordionSummary,
   AccordionDetails,
 } from "@mui/material";
-import { Delete, Edit, ExpandMore } from "@mui/icons-material";
+import { Delete, ExpandMore } from "@mui/icons-material";
 
 const initialCategories = ["Electronics", "Clothing", "Accessories"];
 const initialProducts = [
@@ -41,11 +41,6 @@ const InventoryManagement = () => {
       setProducts([...products, { ...newProduct, id: Date.now() }]);
       setNewProduct({ name: "", category: "" });
     }
-  };
-
-  const handleDeleteCategory = (category) => {
-    setCategories(categories.filter((cat) => cat !== category));
-    setProducts(products.filter((prod) => prod.category !== category));
   };
 
   const handleDeleteProduct = (id) => {

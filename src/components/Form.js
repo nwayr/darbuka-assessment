@@ -10,11 +10,10 @@ import {
   Alert,
   Avatar,
   IconButton,
-  Typography,
 } from "@mui/material";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import { LocalizationProvider, DatePicker } from "@mui/lab";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 const FormSection = ({ onSubmit }) => {
   const [date, setDate] = useState(null);
@@ -26,19 +25,23 @@ const FormSection = ({ onSubmit }) => {
   const [preview, setPreview] = useState(null);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [errorSnackbar, setErrorSnackbar] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!name || !email || !country || !gender || !image) {
+
+    if (!name || !email || !country || !gender || !image || !date) {
       setErrorSnackbar(true);
+      setErrorMessage(
+        "Please fill in all fields, including date and personal image."
+      );
       return;
     }
 
-    onSubmit({ name, email, country, gender, image });
+    onSubmit({ name, email, country, gender, image, date });
 
     setOpenSnackbar(true);
-
     setName("");
     setEmail("");
     setCountry("");
@@ -114,7 +117,6 @@ const FormSection = ({ onSubmit }) => {
         />
       </LocalizationProvider>
 
-      {/* Image Upload Section */}
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <input
           type="file"
@@ -124,74 +126,44 @@ const FormSection = ({ onSubmit }) => {
           onChange={handleFileChange}
         />
         <label htmlFor="image-upload">
-          <IconButton
-            component="span"
-            color="primary"
-            sx={{
-              background: "#f5f5f5",
-              borderRadius: "10px",
-              padding: "10px",
-              "&:hover": { background: "#e0e0e0" },
-            }}
-          >
+          <IconButton component="span" color="primary">
             <PhotoCamera fontSize="large" />
           </IconButton>
         </label>
-
         {preview && (
-          <div style={{ marginTop: "10px" }}>
-            <Avatar
-              src={preview}
-              alt="Preview"
-              sx={{
-                width: 100,
-                height: 100,
-                margin: "auto",
-                border: "2px solid #3f51b5",
-              }}
-            />
-          </div>
+          <Avatar
+            src={preview}
+            alt="Preview"
+            sx={{ width: 100, height: 100, margin: "auto" }}
+          />
         )}
-
-        <Typography
-          variant="body2"
-          color="textSecondary"
-          sx={{ marginTop: "5px" }}
-        >
-          Upload an image
-        </Typography>
       </div>
-      <br />
+
       <Button variant="contained" color="primary" fullWidth type="submit">
         Submit
       </Button>
 
+      {/* Success Snackbar */}
       <Snackbar
         open={openSnackbar}
         autoHideDuration={6000}
         onClose={() => setOpenSnackbar(false)}
       >
-        <Alert
-          onClose={() => setOpenSnackbar(false)}
-          severity="info"
-          sx={{ backgroundColor: "blue", color: "white" }}
-        >
+        <Alert onClose={() => setOpenSnackbar(false)} severity="info">
           User added successfully!
-          <br /> Go to People page to view
+          <br />
+          Go to People page to view!
         </Alert>
       </Snackbar>
 
+      {/* Error Snackbar */}
       <Snackbar
         open={errorSnackbar}
         autoHideDuration={6000}
         onClose={() => setErrorSnackbar(false)}
       >
-        <Alert
-          onClose={() => setErrorSnackbar(false)}
-          severity="error"
-          sx={{ backgroundColor: "red", color: "white" }}
-        >
-          Please fill in all fields and upload an image before submitting.
+        <Alert onClose={() => setErrorSnackbar(false)} severity="error">
+          {errorMessage}
         </Alert>
       </Snackbar>
     </form>

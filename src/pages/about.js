@@ -20,21 +20,14 @@ const About = ({ submissions }) => {
             <Card style={{ boxShadow: "0px 4px 10px rgba(0,0,0,0.1)" }}>
               <CardContent style={{ textAlign: "center" }}>
                 <Avatar
-                  sx={{
-                    width: { xs: 80, sm: 100, md: 120 },
-                    height: { xs: 80, sm: 100, md: 120 },
-                    margin: "auto",
-                  }}
                   src={
                     submission.image
                       ? URL.createObjectURL(submission.image)
                       : `${process.env.PUBLIC_URL}/default-avatar.jpg`
                   }
+                  sx={{ width: 120, height: 120, margin: "auto" }}
                 />
-
-                <Typography variant="h6" sx={{ mt: 1 }}>
-                  {submission.name}
-                </Typography>
+                <Typography variant="h6">{submission.name}</Typography>
                 <Typography color="text.secondary">
                   {submission.email}
                 </Typography>
@@ -47,7 +40,10 @@ const About = ({ submissions }) => {
                   {submission.gender}
                 </Typography>
                 <Typography color="text.secondary">
-                  {submission.date?.toLocaleDateString()}
+                  <span style={{ color: "purple" }}>Date of Birth:</span>{" "}
+                  {submission.date
+                    ? new Date(submission.date).toLocaleDateString()
+                    : "N/A"}
                 </Typography>
               </CardContent>
             </Card>

@@ -43,6 +43,10 @@ const ProductFilterWithImages = () => {
 
   return (
     <div style={{ maxWidth: 800, margin: "auto", marginTop: 20 }}>
+      <br />
+      <Typography variant="h4" align="center" gutterBottom>
+        Items
+      </Typography>
       <Select
         fullWidth
         value={category}
