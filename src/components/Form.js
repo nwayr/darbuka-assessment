@@ -12,9 +12,14 @@ import {
   IconButton,
   Typography,
   Box,
+  useMediaQuery,
 } from "@mui/material";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import {
+  LocalizationProvider,
+  MobileDatePicker,
+  DesktopDatePicker,
+} from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 const FormSection = ({ onSubmit }) => {
@@ -28,6 +33,8 @@ const FormSection = ({ onSubmit }) => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [errorSnackbar, setErrorSnackbar] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const isMobile = useMediaQuery("(max-width: 600px)"); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -67,20 +74,25 @@ const FormSection = ({ onSubmit }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      style={{ maxWidth: 400, margin: "auto", marginTop: "20px" }}
+      style={{
+        maxWidth: 400,
+        width: "100%",
+        margin: "auto",
+        marginTop: "20px",
+        padding: "10px",
+      }}
     >
       <TextField
         fullWidth
         label="Name"
-        margin="normal"
+        margin="dense"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-
       <TextField
         fullWidth
         label="Email"
-        margin="normal"
+        margin="dense"
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -89,7 +101,7 @@ const FormSection = ({ onSubmit }) => {
         select
         fullWidth
         label="Country"
-        margin="normal"
+        margin="dense"
         value={country}
         onChange={(e) => setCountry(e.target.value)}
       >
@@ -102,16 +114,37 @@ const FormSection = ({ onSubmit }) => {
       </TextField>
       <Box mb={2} />
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DatePicker
-          label="Date of Birth"
-          value={date}
-          onChange={setDate}
-          renderInput={(params) => (
-            <TextField {...params} fullWidth margin="normal" />
-          )}
-        />
+        {isMobile ? (
+          <MobileDatePicker
+            label="Date of Birth"
+            value={date}
+            onChange={setDate}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                fullWidth
+                margin="dense"
+                sx={{ maxWidth: "100%" }}
+              />
+            )}
+          />
+        ) : (
+          <DesktopDatePicker
+            label="Date of Birth"
+            value={date}
+            onChange={setDate}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                fullWidth
+                margin="dense"
+                sx={{ maxWidth: "100%" }}
+              />
+            )}
+          />
+        )}
       </LocalizationProvider>
-      <Box mb={2} />
+
       <RadioGroup
         row
         value={gender}
@@ -158,7 +191,7 @@ const FormSection = ({ onSubmit }) => {
         autoHideDuration={6000}
         onClose={() => setOpenSnackbar(false)}
       >
-        <Alert onClose={() => setOpenSnackbar(false)} severity="info">
+        <Alert onClose={() => setOpenSnackbar(false)} severity="success">
           User added successfully!
           <br />
           Go to People page to view!
