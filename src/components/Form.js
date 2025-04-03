@@ -30,7 +30,6 @@ const FormSection = ({ onSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-
     if (!name || !email || !country || !gender || !image || !date) {
       setErrorSnackbar(true);
       setErrorMessage(
@@ -138,7 +137,7 @@ const FormSection = ({ onSubmit }) => {
           />
         )}
       </div>
-
+      <br />
       <Button variant="contained" color="primary" fullWidth type="submit">
         Submit
       </Button>
