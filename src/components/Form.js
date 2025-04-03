@@ -11,6 +11,7 @@ import {
   Avatar,
   IconButton,
   Typography,
+  Box,
 } from "@mui/material";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
@@ -75,6 +76,7 @@ const FormSection = ({ onSubmit }) => {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
+
       <TextField
         fullWidth
         label="Email"
@@ -98,14 +100,7 @@ const FormSection = ({ onSubmit }) => {
         <MenuItem value="Canada">Canada</MenuItem>
         <MenuItem value="Paris">Paris</MenuItem>
       </TextField>
-      <RadioGroup
-        row
-        value={gender}
-        onChange={(e) => setGender(e.target.value)}
-      >
-        <FormControlLabel value="male" control={<Radio />} label="Male" />
-        <FormControlLabel value="female" control={<Radio />} label="Female" />
-      </RadioGroup>
+      <Box mb={2} />
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker
           label="Date of Birth"
@@ -116,6 +111,15 @@ const FormSection = ({ onSubmit }) => {
           )}
         />
       </LocalizationProvider>
+      <Box mb={2} />
+      <RadioGroup
+        row
+        value={gender}
+        onChange={(e) => setGender(e.target.value)}
+      >
+        <FormControlLabel value="male" control={<Radio />} label="Male" />
+        <FormControlLabel value="female" control={<Radio />} label="Female" />
+      </RadioGroup>
 
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <Typography variant="body2" color="textSecondary" gutterBottom>

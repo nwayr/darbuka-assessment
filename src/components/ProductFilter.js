@@ -43,7 +43,6 @@ const ProductFilterWithImages = () => {
 
   return (
     <div style={{ maxWidth: 800, margin: "auto", marginTop: 20 }}>
-      <br />
       <Typography variant="h4" align="center" gutterBottom>
         Items
       </Typography>
@@ -52,6 +51,7 @@ const ProductFilterWithImages = () => {
         value={category}
         onChange={(e) => setCategory(e.target.value)}
         displayEmpty
+        sx={{ marginBottom: 2 }}
       >
         <MenuItem value="">All</MenuItem>
         <MenuItem value="Electronics">Electronics</MenuItem>
@@ -59,20 +59,20 @@ const ProductFilterWithImages = () => {
         <MenuItem value="Accessories">Accessories</MenuItem>
       </Select>
 
-      <Grid container spacing={2} style={{ marginTop: 10 }}>
+      <Grid container spacing={2}>
         {filteredProducts.map((product) => (
-          <Grid item xs={12} sm={6} md={4} key={product.id}>
+          <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
             <Card
               onMouseEnter={() => setHoveredProduct(product.id)}
               onMouseLeave={() => setHoveredProduct(null)}
-              style={{ position: "relative", overflow: "hidden" }}
+              sx={{ position: "relative", overflow: "hidden", height: "100%" }}
             >
               <CardMedia
                 component="img"
                 height="140"
                 image={product.image}
                 alt={product.name}
-                style={{
+                sx={{
                   opacity: hoveredProduct === product.id ? 0.7 : 1,
                   transition: "opacity 0.3s ease",
                 }}

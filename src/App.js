@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Box, Typography, Grid } from "@mui/material"; // Import necessary MUI components
 import Header from "./components/Header";
 import Profile from "./components/Profile";
 import FormSection from "./components/Form";
@@ -17,7 +18,7 @@ const App = () => {
 
   return (
     <Router>
-      <div style={{ maxWidth: "1200px", margin: "auto", padding: "20px" }}>
+      <Box sx={{ maxWidth: "1200px", margin: "auto", padding: "20px" }}>
         <Header />
         <Routes>
           <Route
@@ -34,7 +35,7 @@ const App = () => {
           <Route path="/inventory" element={<InventoryManagement />} />
         </Routes>
         <Footer />
-      </div>
+      </Box>
     </Router>
   );
 };
