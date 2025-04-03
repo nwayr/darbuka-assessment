@@ -18,7 +18,7 @@ const App = () => {
 
   return (
     <Router>
-      <Box sx={{ maxWidth: "1200px", margin: "auto", padding: "20px" }}>
+      <Box sx={{ maxWidth: "1600px", margin: "auto", padding: "20px" }}>
         <Header />
         <Routes>
           <Route
