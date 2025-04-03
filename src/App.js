@@ -6,6 +6,7 @@ import FormSection from "./components/Form";
 import ProductFilter from "./components/ProductFilter";
 import Footer from "./components/Footer";
 import About from "./pages/about";
+import InventoryManagement from "./pages/inventory";
 
 const App = () => {
   const [submissions, setSubmissions] = useState([]);
@@ -30,6 +31,7 @@ const App = () => {
             }
           />
           <Route path="/about" element={<About submissions={submissions} />} />
+          <Route path="/inventory" element={<InventoryManagement />} />
         </Routes>
         <Footer />
       </div>
