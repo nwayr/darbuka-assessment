@@ -10,6 +10,7 @@ import {
   Alert,
   Avatar,
   IconButton,
+  Typography,
 } from "@mui/material";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
@@ -117,6 +118,9 @@ const FormSection = ({ onSubmit }) => {
       </LocalizationProvider>
 
       <div style={{ textAlign: "center", marginTop: "20px" }}>
+        <Typography variant="body2" color="textSecondary" gutterBottom>
+          Upload personal image
+        </Typography>
         <input
           type="file"
           accept="image/*"
@@ -125,9 +129,11 @@ const FormSection = ({ onSubmit }) => {
           onChange={handleFileChange}
         />
         <label htmlFor="image-upload">
-          <IconButton component="span" color="primary">
-            <PhotoCamera fontSize="large" />
-          </IconButton>
+          {!preview && (
+            <IconButton component="span" color="primary">
+              <PhotoCamera fontSize="large" />
+            </IconButton>
+          )}
         </label>
         {preview && (
           <Avatar
