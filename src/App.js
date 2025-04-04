@@ -27,6 +27,7 @@ const App = () => {
         sx={{
           maxWidth: "1600px",
           margin: "auto",
+          minHeight: "100vh",
           padding: "20px",
           backgroundColor: darkMode ? "#001f3f" : "#ffffff", 
           color: darkMode ? "#ffffff" : "#000000", 

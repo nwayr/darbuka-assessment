@@ -51,7 +51,7 @@ const InventoryManagement = ({ darkMode }) => {
     <div
       style={{
         padding: 20,
-        backgroundColor: darkMode ? "#121212" : "#f5f5f5", // Background color based on dark mode
+        backgroundColor: darkMode ? "#00264d" : "#f5f5f5", // Background color based on dark mode
       }}
     >
       <Typography
