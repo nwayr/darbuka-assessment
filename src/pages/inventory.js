@@ -23,7 +23,7 @@ const initialProducts = [
   { id: 3, category: "Accessories", name: "Watch" },
 ];
 
-const InventoryManagement = () => {
+const InventoryManagement = ({ darkMode }) => {
   const [categories, setCategories] = useState(initialCategories);
   const [products, setProducts] = useState(initialProducts);
   const [newCategory, setNewCategory] = useState("");
@@ -48,15 +48,27 @@ const InventoryManagement = () => {
   };
 
   return (
-    <div style={{ padding: 20, backgroundColor: "#f5f5f5" }}>
-      <Typography variant="h4" gutterBottom style={{ color: "#1976d2" }}>
+    <div
+      style={{
+        padding: 20,
+        backgroundColor: darkMode ? "#121212" : "#f5f5f5", // Background color based on dark mode
+      }}
+    >
+      <Typography
+        variant="h4"
+        gutterBottom
+        style={{ color: darkMode ? "#bbdefb" : "#1976d2" }}
+      >
         Inventory Management
       </Typography>
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
-          <Card style={{ backgroundColor: "#e3f2fd" }}>
+          <Card style={{ backgroundColor: darkMode ? "#1e1e1e" : "#e3f2fd" }}>
             <CardContent>
-              <Typography variant="h6" style={{ color: "#0d47a1" }}>
+              <Typography
+                variant="h6"
+                style={{ color: darkMode ? "#bbdefb" : "#0d47a1" }}
+              >
                 Manage Categories
               </Typography>
               <TextField
@@ -65,6 +77,12 @@ const InventoryManagement = () => {
                 onChange={(e) => setNewCategory(e.target.value)}
                 fullWidth
                 margin="normal"
+                InputProps={{
+                  style: { color: darkMode ? "#ffffff" : "#000000" }, // Input text color
+                }}
+                InputLabelProps={{
+                  style: { color: darkMode ? "#bbdefb" : "#000000" }, // Input label color
+                }}
               />
               <Button
                 onClick={handleAddCategory}
@@ -76,7 +94,11 @@ const InventoryManagement = () => {
               {categories.map((category) => (
                 <Accordion key={category} style={{ marginTop: 10 }}>
                   <AccordionSummary expandIcon={<ExpandMore />}>
-                    <Typography>{category}</Typography>
+                    <Typography
+                      style={{ color: darkMode ? "#1976d2" : "#000000" }}
+                    >
+                      {category}
+                    </Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                     {products
@@ -85,7 +107,11 @@ const InventoryManagement = () => {
                         <Card
                           variant="outlined"
                           key={product.id}
-                          style={{ marginBottom: 10 }}
+                          style={{
+                            marginBottom: 10,
+                            backgroundColor: darkMode ? "#2c2c2c" : "#ffffff", // Card background color
+                            color: darkMode ? "#ffffff" : "#000000", // Card text color
+                          }}
                         >
                           <CardContent>
                             <Typography>{product.name}</Typography>
@@ -107,9 +133,12 @@ const InventoryManagement = () => {
           </Card>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Card style={{ backgroundColor: "#e8f5e9" }}>
+          <Card style={{ backgroundColor: darkMode ? "#1e1e1e" : "#e8f5e9" }}>
             <CardContent>
-              <Typography variant="h6" style={{ color: "#1b5e20" }}>
+              <Typography
+                variant="h6"
+                style={{ color: darkMode ? "#bbdefb" : "#1b5e20" }}
+              >
                 Manage Products
               </Typography>
               <TextField
@@ -120,6 +149,12 @@ const InventoryManagement = () => {
                 }
                 fullWidth
                 margin="normal"
+                InputProps={{
+                  style: { color: darkMode ? "#ffffff" : "#000000" }, // Input text color
+                }}
+                InputLabelProps={{
+                  style: { color: darkMode ? "#bbdefb" : "#000000" }, // Input label color
+                }}
               />
               <Select
                 fullWidth
@@ -128,7 +163,10 @@ const InventoryManagement = () => {
                   setNewProduct({ ...newProduct, category: e.target.value })
                 }
                 displayEmpty
-                style={{ marginBottom: 10 }}
+                style={{
+                  marginBottom: 10,
+                  color: darkMode ? "#ffffff" : "#000000",
+                }} // Select text color
               >
                 <MenuItem value="">Select Category</MenuItem>
                 {categories.map((category) => (

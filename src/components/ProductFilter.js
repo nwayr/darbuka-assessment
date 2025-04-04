@@ -33,7 +33,7 @@ const products = [
   },
 ];
 
-const ProductFilterWithImages = () => {
+const ProductFilterWithImages = ({ darkMode }) => {
   const [category, setCategory] = useState("");
   const [hoveredProduct, setHoveredProduct] = useState(null);
 
@@ -43,7 +43,12 @@ const ProductFilterWithImages = () => {
 
   return (
     <div style={{ maxWidth: 800, margin: "auto", marginTop: 20 }}>
-      <Typography variant="h4" align="center" gutterBottom>
+      <Typography
+        variant="h4"
+        align="center"
+        gutterBottom
+        color={darkMode ? "#ffffff" : "#000000"}
+      >
         Items
       </Typography>
       <Select
@@ -52,6 +57,14 @@ const ProductFilterWithImages = () => {
         onChange={(e) => setCategory(e.target.value)}
         displayEmpty
         sx={{ marginBottom: 2 }}
+        MenuProps={{
+          PaperProps: {
+            sx: {
+              backgroundColor: darkMode ? "#424242" : "#ffffff",
+              color: darkMode ? "#ffffff" : "#000000",
+            },
+          },
+        }}
       >
         <MenuItem value="">All</MenuItem>
         <MenuItem value="Electronics">Electronics</MenuItem>
@@ -65,7 +78,13 @@ const ProductFilterWithImages = () => {
             <Card
               onMouseEnter={() => setHoveredProduct(product.id)}
               onMouseLeave={() => setHoveredProduct(null)}
-              sx={{ position: "relative", overflow: "hidden", height: "100%" }}
+              sx={{
+                position: "relative",
+                overflow: "hidden",
+                height: "100%",
+                backgroundColor: darkMode ? "#424242" : "#ffffff",
+                color: darkMode ? "#ffffff" : "#000000",
+              }}
             >
               <CardMedia
                 component="img"
@@ -78,8 +97,13 @@ const ProductFilterWithImages = () => {
                 }}
               />
               <CardContent>
-                <Typography variant="h6">{product.name}</Typography>
-                <Typography color="text.secondary">
+                <Typography
+                  variant="h6"
+                  color={darkMode ? "#ffffff" : "#000000"}
+                >
+                  {product.name}
+                </Typography>
+                <Typography color={darkMode ? "#ffffff" : "text.secondary"}>
                   {product.category}
                 </Typography>
               </CardContent>

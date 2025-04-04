@@ -12,9 +12,11 @@ import {
   Box,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ toggleDarkMode, darkMode }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const toggleDrawer = () => {
@@ -29,11 +31,20 @@ const Header = () => {
 
   return (
     <>
-      <AppBar position="static" sx={{ background: "#333" }}>
+      <AppBar
+        position="static"
+        sx={{ background: darkMode ? "#333" : "#1976d2" }}
+      >
+        {" "}
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             My Website
           </Typography>
+
+          <IconButton onClick={toggleDarkMode} color="inherit">
+            {" "}
+            {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
+          </IconButton>
 
           <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 2 }}>
             {navLinks.map(({ label, path }) => (

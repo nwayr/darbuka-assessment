@@ -22,7 +22,7 @@ import {
 } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
-const FormSection = ({ onSubmit }) => {
+const FormSection = ({ onSubmit, darkMode }) => {
   const [date, setDate] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -34,7 +34,7 @@ const FormSection = ({ onSubmit }) => {
   const [errorSnackbar, setErrorSnackbar] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const isMobile = useMediaQuery("(max-width: 600px)"); 
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -76,18 +76,33 @@ const FormSection = ({ onSubmit }) => {
       onSubmit={handleSubmit}
       style={{
         maxWidth: 400,
-        width: "100%",
+        width: "90%",
         margin: "auto",
         marginTop: "20px",
-        padding: "10px",
+        padding: "20px",
+        backgroundColor: darkMode ? "#00264d" : "#ffffff",
+        color: darkMode ? "#ffffff" : "#000000",
+        borderRadius: "8px",
+        boxShadow: darkMode
+          ? "0 4px 20px rgba(0, 0, 0, 0.5)"
+          : "0 4px 20px rgba(0, 0, 0, 0.1)",
       }}
     >
+      <Typography variant="h6" align="center" gutterBottom>
+        User Information
+      </Typography>
       <TextField
         fullWidth
         label="Name"
         margin="dense"
         value={name}
         onChange={(e) => setName(e.target.value)}
+        InputProps={{
+          style: { color: darkMode ? "#ffffff" : "#000000" },
+        }}
+        InputLabelProps={{
+          style: { color: darkMode ? "#ffffff" : "#000000" },
+        }}
       />
       <TextField
         fullWidth
@@ -96,6 +111,12 @@ const FormSection = ({ onSubmit }) => {
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        InputProps={{
+          style: { color: darkMode ? "#ffffff" : "#000000" },
+        }}
+        InputLabelProps={{
+          style: { color: darkMode ? "#ffffff" : "#000000" },
+        }}
       />
       <TextField
         select
@@ -104,6 +125,12 @@ const FormSection = ({ onSubmit }) => {
         margin="dense"
         value={country}
         onChange={(e) => setCountry(e.target.value)}
+        InputProps={{
+          style: { color: darkMode ? "#ffffff" : "#000000" },
+        }}
+        InputLabelProps={{
+          style: { color: darkMode ? "#ffffff" : "#000000" },
+        }}
       >
         <MenuItem value="USA">USA</MenuItem>
         <MenuItem value="UK">UK</MenuItem>
@@ -124,7 +151,12 @@ const FormSection = ({ onSubmit }) => {
                 {...params}
                 fullWidth
                 margin="dense"
-                sx={{ maxWidth: "100%" }}
+                InputProps={{
+                  style: { color: darkMode ? "#ffffff" : "#000000" },
+                }}
+                InputLabelProps={{
+                  style: { color: darkMode ? "#ffffff" : "#000000" },
+                }}
               />
             )}
           />
@@ -138,7 +170,12 @@ const FormSection = ({ onSubmit }) => {
                 {...params}
                 fullWidth
                 margin="dense"
-                sx={{ maxWidth: "100%" }}
+                InputProps={{
+                  style: { color: darkMode ? "#ffffff" : "#000000" },
+                }}
+                InputLabelProps={{
+                  style: { color: darkMode ? "#ffffff" : "#000000" },
+                }}
               />
             )}
           />
